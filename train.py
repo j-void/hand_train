@@ -49,7 +49,7 @@ print(f'Training for epochs: {num_epochs}, and num_steps: {num_steps}, device: {
 
 for epoch in range(num_epochs):
     
-    for i, real_pose in enumerate(handpts[:2000]):
+    for i, real_pose in enumerate(handpts):
         if i == num_steps:
             break
         real_pose_tensor = torch.tensor(real_pose/128, dtype=torch.float)
