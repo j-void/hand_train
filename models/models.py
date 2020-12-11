@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-
+import os
 
 class Generator(nn.Module):
     
@@ -78,3 +78,6 @@ class Discriminator(nn.Module):
     def forward(self, x):
         return self.disc(x)
 
+def save_model(dict, location, label):
+    file_name = os.path.join(location, label+".pth")
+    torch.save(dict, file_name)
