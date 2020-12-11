@@ -49,7 +49,7 @@ print(f'Training for epochs: {num_epochs}, and num_steps: {num_steps}, device: {
 
 for epoch in range(num_epochs):
     
-    for i, real_pose in enumerate(handpts):
+    for i, real_pose in enumerate(handpts[:2000]):
         if i == num_steps:
             break
         real_pose_tensor = torch.tensor(real_pose/128, dtype=torch.float)
@@ -96,7 +96,7 @@ for epoch in range(num_epochs):
         print(f" End of epoch: {epoch}, Loss D: {lossD:.4f}, loss G: {lossG:.4f}")
         with torch.no_grad():
             fake_img_list = []
-            fake = generator(torch.randn(batch_size, dims).to(device)).reshape(-1, 1, 21, 2)
+            fake = generator(torch.randn(batch_size, dims).to(device)).reshape(-1, 1, 21, 2).cpu()
             for i in range(len(fake)):
                 fake_pts = fake[i][0].numpy()*128
                 fake_img = np.zeros((128, 128, 3), dtype=np.uint8)
