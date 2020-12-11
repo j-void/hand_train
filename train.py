@@ -49,7 +49,7 @@ print(f'Training for epochs: {num_epochs}, and num_steps: {num_steps}, device: {
 
 for epoch in range(num_epochs):
     
-    for i, real_pose in enumerate(handpts[:2000]):
+    for i, real_pose in enumerate(handpts):
         if i == num_steps:
             break
         real_pose_tensor = torch.tensor(real_pose/128, dtype=torch.float)
@@ -105,11 +105,11 @@ for epoch in range(num_epochs):
             vis = np.concatenate(fake_img_list, axis=1)
             cv2.imwrite(f'tmp/fake_e{epoch}.png', vis)
             
-    if epoch % 3 == 0 and epoch > 0:
+    if epoch % 10 == 0 and epoch > 0:
         checkpoints_d = {'state_dict': discriminator.state_dict(), 'optimizer': discriminator_optimizer.state_dict()}
         save_model(checkpoints_d, checkpoints, "epoch_"+str(epoch)+"_D")
         checkpoints_g = {'state_dict': generator.state_dict(), 'optimizer': generator_optimizer.state_dict()}
         save_model(checkpoints_g, checkpoints, "epoch_"+str(epoch)+"_G")
-        print("saving model for epoch:"+str(epoch))
+        print(" saving model for epoch:"+str(epoch))
         
 
