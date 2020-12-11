@@ -80,9 +80,9 @@ for epoch in range(num_epochs):
         generator_optimizer.step()
         
         if i % 100 == 0:
-            print(f"Epoch: [{epoch}/{num_epochs}], iteration: [{i}/{num_steps}], Loss D: {lossD:.4f}, loss G: {lossG:.4f}")
+            print(f"Epoch: [{epoch}/{num_epochs}], iteration: [{i}/{num_steps}], Loss D: {lossD:.4f}, Loss G: {lossG:.4f}")
             with open("iter.out", "w") as text_file:
-                print(f"Epoch: [{epoch}/{num_epochs}], iteration: [{i}/{num_steps}], Loss D: {lossD:.4f}, loss G: {lossG:.4f}", file=text_file)
+                print(f"Epoch: [{epoch}/{num_epochs}], iteration: [{i}/{num_steps}], Loss D: {lossD:.4f}, Loss G: {lossG:.4f}", file=text_file)
 
         
         if i % 1000 == 0 and i > 0:
@@ -93,7 +93,7 @@ for epoch in range(num_epochs):
             print("saving latest model")
 
     if epoch % 1 == 0:
-        print(f" End of epoch: {epoch}, Loss D: {lossD:.4f}, loss G: {lossG:.4f}")
+        print(f" End of epoch: {epoch}, Loss D: {lossD:.4f}, Loss G: {lossG:.4f}")
         with torch.no_grad():
             fake_img_list = []
             fake = generator(torch.randn(batch_size, dims).to(device)).reshape(-1, 1, 21, 2).cpu()
@@ -105,7 +105,7 @@ for epoch in range(num_epochs):
             vis = np.concatenate(fake_img_list, axis=1)
             cv2.imwrite(f'tmp/fake_e{epoch}.png', vis)
             
-    if epoch % 10 == 0 and epoch > 0:
+    if epoch % 3 == 0 and epoch > 0:
         checkpoints_d = {'state_dict': discriminator.state_dict(), 'optimizer': discriminator_optimizer.state_dict()}
         save_model(checkpoints_d, checkpoints, "epoch_"+str(epoch)+"_D")
         checkpoints_g = {'state_dict': generator.state_dict(), 'optimizer': generator_optimizer.state_dict()}
