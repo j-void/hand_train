@@ -10,7 +10,7 @@ import os
 from data_prep.renderMPpose import *
 from models.models import *
 
-output = joblib.load("../data/islrtc_hand_train/lhpts.pkl") 
+output = joblib.load("data/islrtc_hand_train/lhpts.pkl") 
 handpts = output["joints"]
 dims = handpts[0].flatten().shape[0]
 
