@@ -3,3 +3,5 @@ checkpoints/
 *.ipynb
 .ipynb_checkpoints/train-checkpoint.ipynb
 train.ipynb
+iter.out
+*.ipynb
