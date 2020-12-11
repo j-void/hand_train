@@ -81,6 +81,7 @@ for epoch in range(num_epochs):
         
         if i % 100 == 0:
             print(f"Epoch: [{epoch}/{num_epochs}], iteration: [{i}/{num_steps}], Loss D: {lossD:.4f}, loss G: {lossG:.4f}")
+            np.savetxt("iter.out", f"Epoch: [{epoch}/{num_epochs}], iteration: [{i}/{num_steps}], Loss D: {lossD:.4f}, loss G: {lossG:.4f}")
         
         if i % 1000 == 0 and i > 0:
             checkpoints_d = {'state_dict': discriminator.state_dict(), 'optimizer': discriminator_optimizer.state_dict()}
