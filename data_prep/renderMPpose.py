@@ -161,6 +161,29 @@ def restructure_points(handpts, sx, sy):
     hpts[:,1] = hpts[:,1] - sy 
     return hpts.astype(int)
 
+
+def assert_bbox(handpts, size):
+    x_mid = int(np.average(handpts[:,0]))
+    y_mid = int(np.average(handpts[:,1]))
+    x_min = int(np.min(handpts[:,0]))
+    y_min = int(np.min(handpts[:,1]))
+    x_max = int(np.max(handpts[:,0]))
+    y_max = int(np.max(handpts[:,1]))
+    
+    max_dis = max(abs(x_max-x_min), abs(y_max-y_min))
+    
+    if x_mid - max_dis/2 > 0:
+        sx = x_mid - max_dis/2 - max_dis*0.25
+    else:
+        sx = 0
+    
+    if y_mid - max_dis/2 > 0:
+        sy = y_mid - max_dis/2 - max_dis*0.25
+    else:
+        sy = 0
+    
+    return int(sx), int(sx + max_dis*1.5), int(sy), int(sy + max_dis*1.5)
+
 mp_hands = mp.solutions.hands
 
 def GetCoordForCurrentInstance(mp_output):

@@ -5,3 +5,5 @@ checkpoints/
 train.ipynb
 iter.out
 *.ipynb
+.vscode/settings.json
+*.ipynb
